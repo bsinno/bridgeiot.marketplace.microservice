@@ -1,0 +1,19 @@
+image: quay.io/atos_bigiot/build_base:alpine
+stages:
+- Publish
+
+publish-to-nexus:
+  stage: Publish
+  tags:
+    - docker
+  script:
+    - sbt clean publish
+  cache:
+    paths:
+    - target/
+  artifacts:
+    paths:
+    - target/
+  only:
+    - master
+
